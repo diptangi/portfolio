@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diptangi Banerjee - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: white;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #E6D5F0;
+            z-index: 50;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 4rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            color: #C8A8D8;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #333;
+        }
+
+        .nav-btn {
+            display: none;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            background: #B76E79;
+            color: white;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            box-shadow: 0 4px 12px rgba(183, 110, 121, 0.3);
+        }
+
+        .menu-toggle {
+            display: block;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #333;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+            .nav-btn {
+                display: block;
+            }
+            .menu-toggle {
+                display: none;
+            }
+        }
+
+        /* Sections */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-family: Georgia, serif;
+            font-style: italic;
+            color: #C8A8D8;
+            margin-bottom: 3rem;
+        }
+
+        /* Hero */
+        #hero {
+            background: linear-gradient(135deg, #FAFBFC 0%, #F5F0F8 100%);
+            margin-top: 4rem;
+            text-align: center;
+            padding-top: 8rem;
+        }
+
+        #hero h1 {
+            font-size: 3.5rem;
+            font-family: Georgia, serif;
+            font-style: italic;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        #hero p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            background: #B76E79;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            box-shadow: 0 6px 20px rgba(183, 110, 121, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* About */
+        #about {
+            background: #FEF8F5;
+        }
+
+        #about .content {
+            max-width: 800px;
+        }
+
+        #about p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-family: Georgia, serif;
+            font-size: 1.05rem;
+        }
+
+        /* Projects */
+        #projects {
+            background: white;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            border-left: 4px solid #B76E79;
+            margin-bottom: 2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: default;
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card h3 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card .tag {
+            font-size: 0.8rem;
+            color: #B76E79;
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag-item {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 50px;
+            background: #DCC9E8;
+            color: white;
+            font-size: 0.75rem;
+        }
+
+        /* Skills */
+        #skills {
+            background: white;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 640px) {
+            .skills-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .skill-box {
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            background: #FEF8F5;
+        }
+
+        .skill-box h3 {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .skill-box ul {
+            list-style: none;
+        }
+
+        .skill-box li {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            transition: transform 0.2s;
+            cursor: default;
+        }
+
+        .skill-box li:hover {
+            transform: translateX(4px);
+        }
+
+        .skill-box li span {
+            margin-right: 0.75rem;
+            color: #B76E79;
+        }
+
+        .languages {
+            margin-top: 2rem;
+        }
+
+        .languages p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Certifications */
+        #certifications {
+            background: #F5F0F8;
+        }
+
+        .cert-card {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .cert-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .cert-card h3 {
+            font-weight: 500;
+            color: #333;
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .cert-card p {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .cert-check {
+            font-size: 1.5rem;
+            color: #B76E79;
+        }
+
+        /* Contact */
+        #contact {
+            background: white;
+            text-align: center;
+        }
+
+        #contact h2 {
+            margin-bottom: 1rem;
+        }
+
+        #contact p {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .contact-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .icon-btn {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background: #DCC9E8;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .icon-btn:hover {
+            box-shadow: 0 6px 20px rgba(183, 110, 121, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .icon-btn svg {
+            width: 1.2rem;
+            height: 1.2rem;
+            stroke: #B76E79;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .location {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #F9F8F9;
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+            font-size: 0.9rem;
+            border-top: 1px solid #E6D5F0;
+        }
+
+        @media (max-width: 768px) {
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+            section {
+                padding: 3rem 1rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Diptangi</div>
+            <div class="nav-links">
+                <a onclick="scrollToSection('about')">About</a>
+                <a onclick="scrollToSection('projects')">Projects</a>
+                <a onclick="scrollToSection('skills')">Skills</a>
+                <a onclick="scrollToSection('certifications')">Certifications</a>
+            </div>
+            <button class="nav-btn" onclick="scrollToSection('contact')">Get in touch</button>
+            <button class="menu-toggle">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="hero">
+        <h1>Hi, I'm Diptangi</h1>
+        <p>Bridging technology and strategy. Master's in International Management with an AI background, passionate about data insights and business impact.</p>
+        <button class="cta-btn" onclick="scrollToSection('contact')">Let's talk</button>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <h2>About me</h2>
+        <div class="content">
+            <p>I'm a Master's student in International Management at IU University Berlin with a Bachelor's degree in Information Technology (AI specialisation). My unique blend of technical depth and business strategy gives me a distinctive perspective on data problems.</p>
+            <p>Currently working as an Operations Associate at Wolt, where I solve operational challenges and drive process improvements. Previously, I worked in B2B Sales & Market Research, where I developed the ability to translate complex insights into actionable business recommendations.</p>
+            <p>I'm passionate about uncovering insights from data, building frameworks for complex problems, and supporting teams to scale. When I'm not working, you'll find me gaming (Valorant 🎮) or exploring Berlin.</p>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+        <h2>Projects</h2>
+        
+        <div class="project-card">
+            <h3>AI-Based Movie Recommendation System</h3>
+            <div class="tag">Thesis Project</div>
+            <p>Built an intelligent recommendation system using emotion detection and machine learning. The system analyzes user mood states and recommends movies based on emotional alignment, combining NLP and ML techniques to create personalized, sentiment-aware suggestions.</p>
+            <div class="tags">
+                <span class="tag-item">Python</span>
+                <span class="tag-item">Machine Learning</span>
+                <span class="tag-item">NLP</span>
+                <span class="tag-item">Emotion Detection</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <h3>International HR: Diversity & Inclusion Research</h3>
+            <div class="tag">IU University Berlin | 2024</div>
+            <p>Conducted comprehensive research on diversity and inclusion adoption across Indian organizations. Developed evidence-based policy recommendations addressing legal, ethical, and commercial drivers. Presented findings to faculty and peer review panel.</p>
+            <div class="tags">
+                <span class="tag-item">Research</span>
+                <span class="tag-item">Analysis</span>
+                <span class="tag-item">Policy</span>
+                <span class="tag-item">Business Strategy</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <h3>Green Transformation & Corporate Sustainability</h3>
+            <div class="tag">IU University Berlin | 2025</div>
+            <p>Analyzed the role of corporate culture in sustainability adoption using frameworks by Schein, Kotter, and Triple Bottom Line thinking. Developed comparative case studies of Patagonia, Volkswagen, and Unilever transformation strategies, examining how organizational change drives sustainability outcomes.</p>
+            <div class="tags">
+                <span class="tag-item">Case Study</span>
+                <span class="tag-item">Organizational Change</span>
+                <span class="tag-item">Sustainability</span>
+                <span class="tag-item">Strategic Analysis</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+        <h2>Skills</h2>
+        
+        <div class="skills-grid">
+            <div class="skill-box">
+                <h3>Technical</h3>
+                <ul>
+                    <li><span>✦</span>Python & Machine Learning</li>
+                    <li><span>✦</span>SQL (learning)</li>
+                    <li><span>✦</span>Power BI & Data Visualization</li>
+                    <li><span>✦</span>Advanced Excel (Automation, Copilot)</li>
+                    <li><span>✦</span>Google Workspace</li>
+                </ul>
+            </div>
+            <div class="skill-box">
+                <h3>Business</h3>
+                <ul>
+                    <li><span>✦</span>Data Analysis & Insights</li>
+                    <li><span>✦</span>Market Research</li>
+                    <li><span>✦</span>Business Strategy</li>
+                    <li><span>✦</span>Stakeholder Communication</li>
+                    <li><span>✦</span>Operations & Process Improvement</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="languages">
+            <h3>Languages</h3>
+            <p>English (Fluent) • Bengali (Native) • Hindi (Fluent) • German (A2, actively developing)</p>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certifications">
+        <h2>Certifications</h2>
+        
+        <div class="cert-card">
+            <div>
+                <h3>Microsoft Excel Professional Certificate</h3>
+                <p>Coursera | 2026</p>
+            </div>
+            <span class="cert-check">✓</span>
+        </div>
+
+        <div class="cert-card">
+            <div>
+                <h3>Excel Automation & Advanced Techniques with Copilot</h3>
+                <p>Microsoft | 2026</p>
+            </div>
+            <span class="cert-check">✓</span>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <h2>Get in touch</h2>
+        <p>I'd love to hear from you. Reach out for collaborations or just a friendly hello.</p>
+        
+        <div class="contact-icons">
+            <a href="https://www.linkedin.com/in/diptangi-banerjee/" target="_blank" class="icon-btn">
+                <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+            <a href="mailto:diptangiban@gmail.com" class="icon-btn">
+                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
+        </div>
+
+        <p class="location">Based in Berlin, Germany</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Diptangi Banerjee. Made with 💜</p>
+    </footer>
+
+    <script>
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>
