@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Designer Bags: Luxury Market Analysis</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/react.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/react-dom.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.10.3/recharts.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -19,7 +16,7 @@
         .header { background: rgba(88, 28, 135, 0.3); border: 1px solid rgba(71, 85, 105, 0.5); border-radius: 8px; padding: 32px; margin-bottom: 32px; }
         .header h1 { font-size: 36px; margin-bottom: 8px; }
         .header p { color: #cbd5e1; margin-bottom: 16px; }
-        .source-box { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 14px; color: #94a3b8; background: rgba(30, 41, 59, 0.5); border-radius: 8px; padding: 16px; }
+        .source-box { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 14px; color: #94a3b8; background: rgba(30, 41, 59, 0.5); border-radius: 8px; padding: 16px; margin-top: 16px; }
         .summary-box { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.5); border-radius: 8px; padding: 32px; margin: 32px 0; }
         .summary-box h2 { font-size: 24px; margin-bottom: 16px; }
         .summary-box p { color: #cbd5e1; margin-bottom: 12px; line-height: 1.6; }
@@ -34,13 +31,19 @@
         .kpi-card.teal { border-color: rgba(6, 182, 212, 0.3); background: rgba(6, 182, 212, 0.2); }
         .kpi-label { font-size: 12px; color: #94a3b8; }
         .kpi-value { font-size: 28px; font-weight: bold; margin-top: 8px; }
-        .chart-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 32px; margin-bottom: 32px; }
-        .chart-box { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.5); border-radius: 8px; padding: 24px; }
+        .chart-box { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.5); border-radius: 8px; padding: 24px; margin-bottom: 32px; }
         .chart-box h3 { font-size: 18px; margin-bottom: 16px; }
-        .chart-box .insight { font-size: 12px; color: #94a3b8; margin-top: 12px; }
-        .insights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
-        .insight-card { border-radius: 8px; padding: 16px; border-left: 4px solid; }
-        .insight-card h4 { font-weight: 600; color: #94a3b8; margin-bottom: 8px; }
+        .bar-chart { margin: 24px 0; }
+        .bar-item { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .bar-label { width: 150px; font-size: 14px; color: #cbd5e1; }
+        .bar-visual { flex: 1; background: rgba(139, 92, 246, 0.3); border-radius: 4px; height: 30px; display: flex; align-items: center; position: relative; }
+        .bar-value { padding-left: 8px; font-size: 14px; font-weight: 600; }
+        .table-chart { width: 100%; border-collapse: collapse; margin: 16px 0; }
+        .table-chart th { background: rgba(139, 92, 246, 0.2); padding: 12px; text-align: left; border-bottom: 1px solid rgba(71, 85, 105, 0.5); }
+        .table-chart td { padding: 12px; border-bottom: 1px solid rgba(71, 85, 105, 0.3); }
+        .insights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 32px; }
+        .insight-card { border-radius: 8px; padding: 16px; border-left: 4px solid; background: rgba(30, 41, 59, 0.5); }
+        .insight-card h4 { font-weight: 600; color: #cbd5e1; margin-bottom: 8px; }
         .insight-card p { color: #cbd5e1; font-size: 14px; }
         .purple { border-left-color: #a78bfa; }
         .pink { border-left-color: #f472b6; }
@@ -72,9 +75,9 @@
         <div class="summary-box">
             <h2>📋 Executive Summary</h2>
             <p><strong>Market Overview:</strong> This analysis examines 12 flagship handbag models across 6 ultra-luxury brands (Hermès, Chanel, Louis Vuitton, Dior, Gucci, Prada). The dataset reveals three distinct market segments: Ultra-Premium ($8K+), Core Luxury ($3K-$8K), and Accessible Luxury ($1K-$3K).</p>
-            <p><strong>Key Finding #1 — The Margin Paradox:</strong> Hermès dominates margins (70-75%) with lowest volume (380-450 units/model), while Louis Vuitton drives volume (2,000+ units/model) at 55-58% margins. This indicates a clear price elasticity gap: ultra-luxury buyers are price-inelastic; accessible luxury buyers are volume-sensitive.</p>
+            <p><strong>Key Finding #1 — The Margin Paradox:</strong> Hermès dominates margins (70-75%) with lowest volume (380-450 units/model), while Louis Vuitton drives volume (2,000+ units/model) at 55-58% margins. This indicates price elasticity gap: ultra-luxury buyers are price-inelastic.</p>
             <p><strong>Key Finding #2 — Material as Pricing Signal:</strong> Pure leather models (Hermès, Chanel) command 62-75% margins; technical materials (Prada nylon) achieve 50% margins. Leather = perceived scarcity + craftsmanship premium.</p>
-            <p><strong>Key Finding #3 — Demand Concentration:</strong> Average demand score is 8.1/10. Classic models (Birkin, Kelly, Classic Flap) score 9.5+; modern launches score 7.5-8.0. Classic designs = mature demand; modern designs = growth but higher risk.</p>
+            <p><strong>Key Finding #3 — Demand Concentration:</strong> Classic models (Birkin, Kelly, Classic Flap) score 9.5+; modern launches score 7.5-8.0. Classic designs = mature, predictable demand; modern designs = growth but higher risk.</p>
         </div>
 
         <!-- Controls -->
@@ -117,21 +120,146 @@
             </div>
         </div>
 
+        <!-- Charts -->
+        <div class="chart-box">
+            <h3>📊 Brand Performance: Avg Price vs Margin</h3>
+            <table class="table-chart">
+                <thead>
+                    <tr>
+                        <th>Brand</th>
+                        <th>Avg Price</th>
+                        <th>Avg Margin</th>
+                        <th>Product Count</th>
+                    </tr>
+                </thead>
+                <tbody id="brandTable">
+                    <tr>
+                        <td>Hermès</td>
+                        <td>$8,150</td>
+                        <td>72.3%</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>Chanel</td>
+                        <td>$7,067</td>
+                        <td>63.8%</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>Louis Vuitton</td>
+                        <td>$1,755</td>
+                        <td>56.5%</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Gucci</td>
+                        <td>$3,200</td>
+                        <td>48.0%</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Dior</td>
+                        <td>$4,200</td>
+                        <td>52.0%</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Prada</td>
+                        <td>$2,850</td>
+                        <td>50.0%</td>
+                        <td>1</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="chart-box">
+            <h3>💰 Price Distribution by Segment</h3>
+            <div class="bar-chart">
+                <div class="bar-item">
+                    <div class="bar-label">$1K-$3K</div>
+                    <div class="bar-visual" style="width: 70%; background: linear-gradient(90deg, #8b5cf6, #ec4899);">
+                        <div class="bar-value">6 bags</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">$3K-$5K</div>
+                    <div class="bar-visual" style="width: 42%; background: linear-gradient(90deg, #f59e0b, #ec4899);">
+                        <div class="bar-value">3 bags</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">$5K-$8K</div>
+                    <div class="bar-visual" style="width: 36%; background: linear-gradient(90deg, #10b981, #06b6d4);">
+                        <div class="bar-value">2 bags</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">$8K+</div>
+                    <div class="bar-visual" style="width: 50%; background: linear-gradient(90deg, #3b82f6, #8b5cf6);">
+                        <div class="bar-value">3 bags</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-box">
+            <h3>📈 Margin Comparison by Brand</h3>
+            <div class="bar-chart">
+                <div class="bar-item">
+                    <div class="bar-label">Hermès</div>
+                    <div class="bar-visual" style="width: 96%; background: #8b5cf6;">
+                        <div class="bar-value">72%</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">Chanel</div>
+                    <div class="bar-visual" style="width: 85%; background: #ec4899;">
+                        <div class="bar-value">64%</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">Louis Vuitton</div>
+                    <div class="bar-visual" style="width: 75%; background: #f59e0b;">
+                        <div class="bar-value">57%</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">Dior</div>
+                    <div class="bar-visual" style="width: 69%; background: #10b981;">
+                        <div class="bar-value">52%</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">Prada</div>
+                    <div class="bar-visual" style="width: 67%; background: #06b6d4;">
+                        <div class="bar-value">50%</div>
+                    </div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">Gucci</div>
+                    <div class="bar-visual" style="width: 64%; background: #3b82f6;">
+                        <div class="bar-value">48%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Key Insights -->
         <div style="margin-bottom: 32px;">
             <h2 style="margin-bottom: 16px;">💡 Strategic Insights</h2>
             <div class="insights-grid">
                 <div class="insight-card purple">
                     <h4>Pricing Strategy Tiers</h4>
-                    <p>Hermès uses scarcity + margin maximization; LV uses volume + accessibility; Dior/Gucci balance both.</p>
+                    <p>Hermès uses scarcity + margin maximization; LV uses volume + accessibility; Dior/Gucci balance both. Each strategy is internally consistent.</p>
                 </div>
                 <div class="insight-card pink">
                     <h4>Material as Demand Signal</h4>
-                    <p>Classic leather pieces (9.5+ demand) outperform modern technical materials (7.5-8.0 demand).</p>
+                    <p>Classic leather pieces (9.5+ demand) outperform modern technical materials (7.5-8.0 demand). Heritage materials = trust; new materials = risk.</p>
                 </div>
                 <div class="insight-card amber">
                     <h4>Volume vs. Margin Trade-off</h4>
-                    <p>Ultra-luxury brands sacrifice 75% of unit volume vs. accessible luxury to preserve 15%+ margin advantage.</p>
+                    <p>Ultra-luxury brands sacrifice 75% of unit volume vs. accessible luxury to preserve 15%+ margin advantage. No brand succeeds at both simultaneously.</p>
                 </div>
             </div>
         </div>
@@ -152,7 +280,7 @@
                     <li>Retail prices: $1,150–$12,500 (8x price range within brand)</li>
                     <li>Margins: 70-75% (12+ points above competitors)</li>
                     <li>Demand scores: 9.1–9.8 (highest in dataset)</li>
-                    <li>Estimated volume: 380–1,680 units/year (40% lower than LV for same category)</li>
+                    <li>Estimated volume: 380–1,680 units/year (40% lower than LV)</li>
                 </ul>
                 <p style="margin-top: 12px;"><strong>The insight:</strong> Hermès doesn't compete on volume—it competes on <em>perceived scarcity</em> and <em>heritage</em>. The brand invests in waiting lists, handcrafted materials, annual price increases, and limited retail distribution.</p>
             </div>
@@ -160,37 +288,37 @@
             <div class="case-section">
                 <h3>Business Implication</h3>
                 <p>Hermès proves luxury pricing transcends elasticity curves. A Birkin isn't purchased for utility; it's purchased for <em>status signal</em> and <em>investment perception</em>. This allows Hermès to sustain 70% margins on inventory that turns only 300-500 units/year.</p>
-                <p style="margin-top: 12px;"><strong>For competing brands:</strong> Chanel follows a hybrid model (Classic Flap: $8,200 at 65% margin, 1,200 units/year). Louis Vuitton captures volume-buyers seeking entry-level luxury ($1,600–$1,880) at 55% margins with 2,000+ units/year. Each strategy is internally consistent with customer psychology.</p>
+                <p style="margin-top: 12px;"><strong>For competing brands:</strong> Chanel (Classic Flap: $8,200 at 65% margin, 1,200 units/year) and Louis Vuitton ($1,600–$1,880 at 55% margin, 2,000+ units/year) each reflect internally consistent strategies with distinct customer psychology.</p>
             </div>
 
             <div class="case-section">
                 <h3>Key Takeaway</h3>
                 <div class="key-takeaway">
-                    Ultra-luxury margins (70%+) are not sustainable through pricing power alone—they require <strong>scarcity architecture</strong> (waiting lists, limited production, heritage narrative). Brands attempting to raise prices without building scarcity perception face volume collapse. Hermès succeeds because customers believe the brand controls supply; Louis Vuitton succeeds because customers believe the brand enables access.
+                    Ultra-luxury margins (70%+) are not sustainable through pricing power alone—they require <strong>scarcity architecture</strong> (waiting lists, limited production, heritage narrative). Hermès succeeds because customers believe the brand controls supply; Louis Vuitton succeeds because customers believe the brand enables access. Both are deliberate positioning choices, reflected in margin and volume outcomes.
                 </div>
             </div>
         </div>
 
         <!-- Footer -->
         <div class="footer">
-            Data sourced from Kaggle Luxury Fashion Dataset (2023-2024) | Brand retail pricing from official sources
+            Data sourced from Kaggle Luxury Fashion Dataset (2023-2024) | Brand retail pricing from official sources | Design by Diptangi
         </div>
     </div>
 
     <script>
         const bagData = [
-            { brand: 'Hermès', price: 12500, margin: 75, demand: 9.8 },
-            { brand: 'Hermès', price: 10800, margin: 72, demand: 9.6 },
-            { brand: 'Chanel', price: 8200, margin: 65, demand: 9.5 },
-            { brand: 'Chanel', price: 7800, margin: 62, demand: 8.9 },
-            { brand: 'Louis Vuitton', price: 1880, margin: 58, demand: 8.2 },
-            { brand: 'Louis Vuitton', price: 1630, margin: 55, demand: 8.8 },
-            { brand: 'Gucci', price: 3200, margin: 48, demand: 7.8 },
-            { brand: 'Dior', price: 4200, margin: 52, demand: 8.4 },
-            { brand: 'Prada', price: 2850, margin: 50, demand: 7.5 },
-            { brand: 'Bottega Veneta', price: 3500, margin: 51, demand: 7.9 },
-            { brand: 'Hermès', price: 1150, margin: 70, demand: 8.1 },
-            { brand: 'Chanel', price: 5200, margin: 64, demand: 7.6 }
+            { brand: 'Hermès', price: 12500, margin: 75 },
+            { brand: 'Hermès', price: 10800, margin: 72 },
+            { brand: 'Chanel', price: 8200, margin: 65 },
+            { brand: 'Chanel', price: 7800, margin: 62 },
+            { brand: 'Louis Vuitton', price: 1880, margin: 58 },
+            { brand: 'Louis Vuitton', price: 1630, margin: 55 },
+            { brand: 'Gucci', price: 3200, margin: 48 },
+            { brand: 'Dior', price: 4200, margin: 52 },
+            { brand: 'Prada', price: 2850, margin: 50 },
+            { brand: 'Bottega Veneta', price: 3500, margin: 51 },
+            { brand: 'Hermès', price: 1150, margin: 70 },
+            { brand: 'Chanel', price: 5200, margin: 64 }
         ];
 
         function updateKPIs() {
@@ -212,12 +340,10 @@
             const count = filtered.length;
             const avgPrice = Math.round(filtered.reduce((sum, b) => sum + b.price, 0) / count);
             const avgMargin = (filtered.reduce((sum, b) => sum + b.margin, 0) / count).toFixed(1);
-            const avgDemand = (filtered.reduce((sum, b) => sum + b.demand, 0) / count).toFixed(1);
 
             document.getElementById('kpiCount').textContent = count;
             document.getElementById('kpiPrice').textContent = '$' + avgPrice.toLocaleString();
             document.getElementById('kpiMargin').textContent = avgMargin + '%';
-            document.getElementById('kpiDemand').textContent = avgDemand + '/10';
         }
 
         document.getElementById('brandSelect').addEventListener('change', updateKPIs);
